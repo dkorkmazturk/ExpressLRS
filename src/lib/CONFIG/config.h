@@ -207,7 +207,7 @@ typedef struct {
     uint8_t     modelId;
     uint8_t     serialProtocol:4,
                 failsafeMode:2,
-                unused:2;
+                satelliteSystem:2;
     rx_config_pwm_t pwmChannels[PWM_MAX_CHANNELS];
 } rx_config_t;
 
@@ -236,6 +236,7 @@ public:
     uint8_t GetRateInitialIdx() const { return m_config.rateInitialIdx; }
     eSerialProtocol GetSerialProtocol() const { return (eSerialProtocol)m_config.serialProtocol; }
     eFailsafeMode GetFailsafeMode() const { return (eFailsafeMode)m_config.failsafeMode; }
+    eSatelliteSystem GetSatelliteSystem() const {return (eSatelliteSystem)m_config.satelliteSystem; }
 
     // Setters
     void SetIsBound(bool isBound);
@@ -256,6 +257,7 @@ public:
     void SetRateInitialIdx(uint8_t rateInitialIdx);
     void SetSerialProtocol(eSerialProtocol serialProtocol);
     void SetFailsafeMode(eFailsafeMode failsafeMode);
+    void SetSatelliteSystem(eSatelliteSystem satelliteSystem);
 
 private:
     void UpgradeEepromV4();

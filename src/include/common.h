@@ -188,6 +188,7 @@ enum eSerialProtocol : uint8_t
 	PROTOCOL_SUMD,
     PROTOCOL_DJI_RS_PRO,
     PROTOCOL_HOTT_TLM
+    PROTOCOL_SPEKTRUM_SATELLITE,
 };
 
 enum eFailsafeMode : uint8_t
@@ -195,6 +196,14 @@ enum eFailsafeMode : uint8_t
     FAILSAFE_NO_PULSES,
     FAILSAFE_LAST_POSITION,
     FAILSAFE_SET_POSITION
+};
+
+enum eSatelliteSystem : uint8_t
+{
+    DSMX_11MS,
+    DSMX_22MS,
+    DSM2_11MS,
+    DSM2_22MS,
 };
 
 #ifndef UNIT_TEST

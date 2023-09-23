@@ -1038,4 +1038,13 @@ void RxConfig::SetFailsafeMode(eFailsafeMode failsafeMode)
         m_modified = true;
     }
 }
+
+void RxConfig::SetSatelliteSystem(eSatelliteSystem satelliteSystem)
+{
+    if (m_config.satelliteSystem != satelliteSystem)
+    {
+        m_config.satelliteSystem = satelliteSystem;
+        m_modified = true;
+    }
+}
 #endif

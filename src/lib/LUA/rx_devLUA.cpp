@@ -18,7 +18,14 @@ static const char *rxModes = "50Hz;60Hz;100Hz;160Hz;333Hz;400Hz;10kHzDuty;On/Off
 static struct luaItem_selection luaSerialProtocol = {
     {"Protocol", CRSF_TEXT_SELECTION},
     0, // value
-    "CRSF;Inverted CRSF;SBUS;Inverted SBUS;SUMD;DJI RS Pro;HoTT Telemetry",
+    "CRSF;Inverted CRSF;SBUS;Inverted SBUS;SUMD;DJI RS Pro;HoTT Telemetry,Spektrum Satellite",
+    STR_EMPTYSPACE
+};
+
+static struct luaItem_selection luaSatelliteSystem = {
+    {"Satellite System", CRSF_TEXT_SELECTION},
+    0, // value
+    "DSMX 11MS;DSMX 22MS;DSM2 11MS;DSM2 22MS",
     STR_EMPTYSPACE
 };
 
@@ -312,7 +319,17 @@ static void registerLuaParameters()
     }
   });
 
-  if (config.GetSerialProtocol() == PROTOCOL_SBUS || config.GetSerialProtocol() == PROTOCOL_INVERTED_SBUS || config.GetSerialProtocol() == PROTOCOL_DJI_RS_PRO)
+  if (config.GetSerialProtocol() == PROTOCOL_SPEKTRUM_SATELLITE)
+  {
+    registerLUAParameter(&luaSatelliteSystem, [](struct luaPropertiesCommon* item, uint8_t arg){
+      config.SetSatelliteSystem((eSatelliteSystem)arg);
+    });
+  }
+
+  if (config.GetSerialProtocol() == PROTOCOL_SBUS ||
+      config.GetSerialProtocol() == PROTOCOL_INVERTED_SBUS ||
+      config.GetSerialProtocol() == PROTOCOL_DJI_RS_PRO ||
+      config.GetSerialProtocol() == PROTOCOL_SPEKTRUM_SATELLITE)
   {
     registerLUAParameter(&luaFailsafeMode, [](struct luaPropertiesCommon* item, uint8_t arg){
       config.SetFailsafeMode((eFailsafeMode)arg);
